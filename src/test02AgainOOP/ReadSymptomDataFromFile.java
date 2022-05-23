@@ -1,65 +1,41 @@
 package test02AgainOOP;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ReadSymptomDataFromFile implements ISymptomReader {
-	// field
 	private String filepath;
-	private List<String> symptomList;
-	private Map<String, Integer> symptomData;
-
-	// constructor
-	public ReadSymptomDataFromFile(String filepath, List<String> symptomList, Map<String, Integer> symptomData) {
-		this.filepath = filepath;
-		this.symptomList = symptomList;
-		this.symptomData = symptomData;
-	}
-
-	// getter
-	public String getFilepath() {
-		return filepath;
-	}
-
-	public List<String> getSymptomList() {
-		return symptomList;
-	}
-
-	public Map<String, Integer> getSymptomData() {
-		return symptomData;
-	}
-
-	// setter
-	public void setFILE_PATH(String filepath) {
+	
+	/**
+	 * 
+	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 */
+	public ReadSymptomDataFromFile (String filepath) {
 		this.filepath = filepath;
 	}
-
-	public void setGetSymptomList(List<String> symptomList) {
-		this.symptomList = symptomList;
-	}
-
-	public void setGetSymptomData(Map<String, Integer> symptomData) {
-		this.symptomData = symptomData;
-	}
-
-	public List<String> listFromFile(String filepath) throws IOException {
-		List<String> result;
-		try (Stream<String> lines = Files.lines(Paths.get(filepath))) {
-			result = lines.collect(Collectors.toList());
-		}
-		return result;
-
-	}
-
-	public Map<String, Integer> listToMap (List<String> SymptomList){
-			  Map<String, Integer> map = SymptomList.stream()
-			    .collect(Collectors.toMap(map?::getSymptoms,Function.identity()));
-			  return map;
+	
+	@Override
+	public List<String> GetSymptoms() {
+		ArrayList<String> result = new ArrayList<String>();
+		
+		if (filepath != null) {
+			try {
+				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+				String line = reader.readLine();
+				
+				while (line != null) {
+					result.add(line);
+					line = reader.readLine();
 				}
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
 }

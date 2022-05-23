@@ -16,28 +16,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
+
+		String filepath = "ressource/symptoms.txt";
+		String writeFilepath ="ressource/output.txt";
+		ReadSymptomDataFromFile read = new ReadSymptomDataFromFile(filepath);
+		List<String> symptomList = read.GetSymptoms();
+		ProcessSymptoms processSymptoms = new ProcessSymptoms();
+		Map<String, Integer> symptomMap = processSymptoms.listToMap(symptomList) ;
+		MakeSymptomFile makeSymptomFile = new MakeSymptomFile(writeFilepath);
+		makeSymptomFile.symptomFileMaker(symptomMap);
 		
-	String filepath = "ressource/symptoms.txt";
-	List<String> symptomList = null;
-	Map<String, Integer> symptomMap = null;
-	
-	ReadSymptomDataFromFile read = new ReadSymptomDataFromFile(filepath,symptomList, symptomMap);
-	read.listFromFile(filepath);
-		
-}
 
-// ListFromFile
-
-
-//MapFromList
-private static Map<String, Integer> convertListToMap(List<String> list) {
-  Map<String, Integer> map = list.stream()
-    .collect(Collectors.toMap(SymptomsModel::getSymptoms,Function.identity()));
-  return map;
 	}
 }
-

@@ -8,25 +8,17 @@ import java.util.Map;
 
 public class MakeSymptomFile implements ISymptomFileMaker {
 	// field
-	private Map<String, Integer> symptomData;
+	private String filepath;
 
 	// constructor
-	public MakeSymptomFile(Map<String, Integer> symptomData) {
-		this.symptomData = symptomData;
-	}
-	// getter
-	public Map<String, Integer> getSymptomData() {
-		return symptomData;
-	}
-
-	// setter
-	public void setSymptomData(Map<String, Integer> symptomData) {
-		this.symptomData = symptomData;
+	public MakeSymptomFile(String filepath) {
+		this.filepath = filepath;
 	}
 
 	public void symptomFileMaker(Map<String, Integer> symptomData) {
+
 		try {
-			FileWriter writer = new FileWriter("/Users/shizukatanigawa/Downloads/resultout.txt");
+			FileWriter writer = new FileWriter(filepath);
 			PrintWriter printWriter = new PrintWriter(new BufferedWriter(writer));
 			for (Map.Entry<String, Integer> entry : symptomData.entrySet()) {
 				printWriter.println(entry.getKey() + ":" + entry.getValue());
