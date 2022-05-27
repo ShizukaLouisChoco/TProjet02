@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class MakeSymptomFile implements ISymptomFileMaker {
+public class SymptomFileMaker implements ISymptomFileMaker {
 	// field
 	private String filepath;
 
 	// constructor
-	public MakeSymptomFile(String filepath) {
+	public SymptomFileMaker(String filepath) {
 		this.filepath = filepath;
 	}
 

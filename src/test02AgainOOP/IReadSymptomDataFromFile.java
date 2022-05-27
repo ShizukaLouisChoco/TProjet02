@@ -2,7 +2,7 @@ package test02AgainOOP;
 
 import java.util.List;
 
-public interface ISymptomReader {
+public interface IReadSymptomDataFromFile {
 
 	List<String> GetSymptoms();
 	

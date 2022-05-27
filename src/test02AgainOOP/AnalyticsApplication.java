@@ -17,12 +17,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Main {
+public class AnalyticsApplication {
 	public static void main(String[] args) throws IOException {
 
 		String filepath = "ressource/symptoms.txt";
 		String writeFilepath ="ressource/output.txt";
-		ReadSymptomDataFromFile read = new ReadSymptomDataFromFile(filepath);
+		ISympotmReader read = new ReadSymptomDataFromFile(filepath);
 		List<String> symptomList = read.GetSymptoms();
 		ProcessSymptoms processSymptoms = new ProcessSymptoms();
 		Map<String, Integer> symptomMap = processSymptoms.listToMap(symptomList) ;
